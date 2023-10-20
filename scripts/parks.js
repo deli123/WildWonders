@@ -2,9 +2,9 @@ import { locationsArray } from "./data/locationData.js";
 import { nationalParksArray } from "./data/nationalParkData.js";
 import { parkTypesArray } from "./data/parkTypeData.js";
 
-// populate park locations
 const locationSelect = document.getElementById("park-location");
 const typeSelect = document.getElementById("park-type");
+const viewAllBtn = document.getElementById("view-all-btn");
 const parksContainer = document.getElementById("parks-container");
 
 const populateLocations = () => {
@@ -43,10 +43,30 @@ const populateParksByType = () => {
       park.LocationName.toLowerCase().includes(typeSelect.value.toLowerCase())
     ) {
       parksContainer.innerHTML += `<p class='m-0'>${park.LocationName}</p>
-      <p>${park.Address ? park.Address + ", " : ""}
+      <p class='m-0'>${park.Address ? park.Address + ", " : ""}
       ${park.City}, ${park.State}
-      ${park.ZipCode ? ", " + park.ZipCode : ""}</p>`;
+      ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
+      <p>${
+        park.Visit
+          ? `<a href=${park.Visit} target="_blank">${park.Visit}</a>`
+          : ""
+      }</p>`;
     }
+  });
+};
+
+const populateAllParks = () => {
+  parksContainer.innerHTML = "";
+  nationalParksArray.forEach((park) => {
+    parksContainer.innerHTML += `<p class='m-0'>${park.LocationName}</p>
+    <p class='m-0'>${park.Address ? park.Address + ", " : ""}
+    ${park.City}, ${park.State}
+    ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
+    <p>${
+      park.Visit
+        ? `<a href=${park.Visit} target="_blank">${park.Visit}</a>`
+        : ""
+    }</p>`;
   });
 };
 
@@ -54,3 +74,4 @@ populateLocations();
 populateTypes();
 locationSelect.addEventListener("change", populateParksByLocation);
 typeSelect.addEventListener("change", populateParksByType);
+viewAllBtn.addEventListener("click", populateAllParks);
