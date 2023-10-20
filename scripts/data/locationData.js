@@ -1,4 +1,4 @@
-const locationsArray = [
+export const locationsArray = [
     "Alabama",
     "Alaska",
     "American Samoa",
