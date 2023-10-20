@@ -18,9 +18,14 @@ const populateParksByLocation = () => {
   nationalParksArray.forEach((park) => {
     if (park.State === locationSelect.value) {
       parksContainer.innerHTML += `<p class='m-0'>${park.LocationName}</p>
-      <p>${park.Address ? park.Address + ", " : ""}
+      <p class='m-0'>${park.Address ? park.Address + ", " : ""}
       ${park.City}, ${park.State}
-      ${park.ZipCode ? ", " + park.ZipCode : ""}</p>`;
+      ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
+      <p>${
+        park.Visit
+          ? `<a href=${park.Visit} target="_blank">${park.Visit}</a>`
+          : ""
+      }</p>`;
     }
   });
 };
@@ -34,7 +39,9 @@ const populateTypes = () => {
 const populateParksByType = () => {
   parksContainer.innerHTML = "";
   nationalParksArray.forEach((park) => {
-    if (park.LocationName.includes(typeSelect.value)) {
+    if (
+      park.LocationName.toLowerCase().includes(typeSelect.value.toLowerCase())
+    ) {
       parksContainer.innerHTML += `<p class='m-0'>${park.LocationName}</p>
       <p>${park.Address ? park.Address + ", " : ""}
       ${park.City}, ${park.State}
