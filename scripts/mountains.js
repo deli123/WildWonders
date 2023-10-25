@@ -24,16 +24,19 @@ const createMountainModal = (mountain, index) => {
   <div class="modal fade" id="mountain-${index}-modal" tabindex="-1" aria-labelledby="${mountainLabel}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header d-flex flex-column justify-content-center">
+          <img src="images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
           <h1 class="modal-title fs-5" id="${mountainLabel}">${mountain.name}</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          ...
+        <div class="modal-body text-center">
+          <p class="text-start">${mountain.desc}</p>
+          <p><span class="fw-bold">Elevation: </span>${mountain.elevation}</p>
+          <p><span class="fw-bold">Effort: </span>${mountain.effort}</p>
+          <p><span class="fw-bold">Latitude: </span>${mountain.coords.lat}</p>
+          <p><span class="fw-bold">Longitude: </span>${mountain.coords.lng}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
         </div>
       </div>
     </div>
