@@ -7,7 +7,7 @@ const mountainsContainer = document.getElementById("mountains-container");
 
 const createMountainCard = (mountain, index) => {
   const card = `
-  <div class="card col-3 mx-auto my-3" id="mountain-${index}" data-bs-toggle="modal" data-bs-target="#mountain-${index}-modal" style="width: 18rem;">
+  <div class="card col-3 mx-auto my-3 mountain-card" id="mountain-${index}" data-bs-toggle="modal" data-bs-target="#mountain-${index}-modal" style="width: 18rem;">
     <img src="images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
     <div class="card-body">
       <h5 class="card-title text-center">${mountain.name}</h5>
