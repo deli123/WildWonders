@@ -1,4 +1,4 @@
-const mountainsArray = [
+export const mountainsData = [
     {
         name: "Mt. Washington",
         elevation: 6288,
