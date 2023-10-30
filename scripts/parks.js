@@ -13,26 +13,32 @@ const populateLocations = () => {
   });
 };
 
+const populateTypes = () => {
+  parkTypesArray.forEach((e) => {
+    return (typeSelect.innerHTML += `<option value="${e}">${e}</option>`);
+  });
+};
+
+const generatePark = (park) => {
+  const parkDetails = `<p class='m-0'>${park.LocationName}</p>
+    <p class='m-0'>${park.Address ? park.Address + ", " : ""}
+    ${park.City}, ${park.State}
+    ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
+    ${
+      park.Visit
+        ? `<p><a href=${park.Visit} target="_blank">${park.Visit}</a></p>`
+        : ""
+    }`;
+
+  return parkDetails;
+};
+
 const populateParksByLocation = () => {
   parksContainer.innerHTML = "";
   nationalParksArray.forEach((park) => {
     if (park.State === locationSelect.value) {
-      parksContainer.innerHTML += `<p class='m-0'>${park.LocationName}</p>
-      <p class='m-0'>${park.Address ? park.Address + ", " : ""}
-      ${park.City}, ${park.State}
-      ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
-      <p>${
-        park.Visit
-          ? `<a href=${park.Visit} target="_blank">${park.Visit}</a>`
-          : ""
-      }</p>`;
+      parksContainer.innerHTML += generatePark(park);
     }
-  });
-};
-
-const populateTypes = () => {
-  parkTypesArray.forEach((e) => {
-    return (typeSelect.innerHTML += `<option value="${e}">${e}</option>`);
   });
 };
 
@@ -42,15 +48,7 @@ const populateParksByType = () => {
     if (
       park.LocationName.toLowerCase().includes(typeSelect.value.toLowerCase())
     ) {
-      parksContainer.innerHTML += `<p class='m-0'>${park.LocationName}</p>
-      <p class='m-0'>${park.Address ? park.Address + ", " : ""}
-      ${park.City}, ${park.State}
-      ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
-      <p>${
-        park.Visit
-          ? `<a href=${park.Visit} target="_blank">${park.Visit}</a>`
-          : ""
-      }</p>`;
+      parksContainer.innerHTML += generatePark(park);
     }
   });
 };
@@ -58,15 +56,7 @@ const populateParksByType = () => {
 const populateAllParks = () => {
   parksContainer.innerHTML = "";
   nationalParksArray.forEach((park) => {
-    parksContainer.innerHTML += `<p class='m-0'>${park.LocationName}</p>
-    <p class='m-0'>${park.Address ? park.Address + ", " : ""}
-    ${park.City}, ${park.State}
-    ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
-    <p>${
-      park.Visit
-        ? `<a href=${park.Visit} target="_blank">${park.Visit}</a>`
-        : ""
-    }</p>`;
+    parksContainer.innerHTML += generatePark(park);
   });
 };
 

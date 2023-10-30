@@ -18,7 +18,7 @@ const createMountainCard = (mountain, index) => {
 
 const createMountainModal = (mountain, index) => {
   // since mountain names can have two words separated by a space (eg. Mt. Washington), join them with a hypen
-  // this ensures that the id for each mountain is a single word
+  // this ensures that the #id for each mountain is a single word
   const mountainLabel = mountain.name.split(" ").join("-");
   const modal = `
   <div class="modal fade" id="mountain-${index}-modal" tabindex="-1" aria-labelledby="${mountainLabel}" aria-hidden="true">
