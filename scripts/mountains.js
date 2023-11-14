@@ -3,10 +3,12 @@ import * as Util from "./utils.js";
 
 const mountainsArray = Util.sortByKey(mountainsData, "name");
 const mountainsContainer = document.getElementById("mountains-container");
+const mountainSelect = document.getElementById("mountain-select");
 
 const createMountainCard = (mountain, index) => {
   const card = `
-  <div class="card col-3 mx-auto my-3 card-mountain" id="mountain-${index}" data-bs-toggle="modal" data-bs-target="#mountain-${index}-modal" style="width: 18rem;">
+  <div class="card col-3 mx-auto my-3 card-mountain" id="mountain-${index}" 
+    data-bs-toggle="modal" data-bs-target="#mountain-${index}-modal" style="width: 18rem;">
     <img src="assets/images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
     <div class="card-body">
       <h5 class="card-title text-center">${mountain.name}</h5>
@@ -26,7 +28,7 @@ const createMountainModal = (mountain, index) => {
       <div class="modal-content">
         <div class="modal-header d-flex flex-column justify-content-center">
           <img src="assets/images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
-          <h1 class="modal-title fs-5" id="${mountainLabel}">${mountain.name}</h1>
+          <h1 class="modal-title fs-5 mt-3" id="${mountainLabel}">${mountain.name}</h1>
         </div>
         <div class="modal-body text-center" id="mountain-${index}-body">
           <p class="text-start">${mountain.desc}</p>
@@ -36,7 +38,8 @@ const createMountainModal = (mountain, index) => {
           <p><span class="fw-bold">Longitude: </span>${mountain.coords.lng}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+          <button type="button" class="btn btn-secondary" 
+          data-bs-dismiss="modal" aria-label="Close">Close</button>
         </div>
       </div>
     </div>
@@ -44,15 +47,13 @@ const createMountainModal = (mountain, index) => {
   return modal;
 };
 
-// create a card and modal for each mountain
-const populateMountains = () => {
-  mountainsArray.forEach((mountain, index) => {
-    // 'beforeend' inserts each mountain one after another
-    mountainsContainer.insertAdjacentHTML(
-      "beforeend",
-      createMountainCard(mountain, index) + createMountainModal(mountain, index)
-    );
-  });
+const showMountainModal = (selectedMountain) => {
+  // the mountain element can potentially be null if no mountain was selected
+  const mountain = document.getElementById(`${selectedMountain}-modal`);
+  if (mountain) {
+    const modal = new bootstrap.Modal(mountain);
+    modal.show();
+  }
 };
 
 const createSunsetText = (sunsetData) => {
@@ -73,10 +74,50 @@ const displaySunsetTimes = async (mountainID) => {
   mountainBody.insertAdjacentHTML("beforeend", createSunsetText(sunsetData));
 };
 
+// create a card and modal for each mountain
+const populateMountains = () => {
+  mountainsArray.forEach((mountain, index) => {
+    const mountainOption = new Option(mountain.name, `mountain-${index}`);
+    mountainSelect.appendChild(mountainOption);
+    // 'beforeend' inserts each mountain one after another
+    mountainsContainer.insertAdjacentHTML(
+      "beforeend",
+      createMountainCard(mountain, index) + createMountainModal(mountain, index)
+    );
+  });
+};
+
 populateMountains();
+
 const allMountainCards = document.querySelectorAll(".card-mountain");
 allMountainCards.forEach((card) => {
   card.addEventListener("click", () => {
-    displaySunsetTimes(card.id);
+    // displaySunsetTimes(card.id);
   });
+});
+
+/**
+ * The 2 event listeners, "mouseup" and "blur" on the select element
+ * work in tandem to allow the same option to be selected
+ * When the select menu is initially opened, isMountainSelected will turn True
+ * This will then allow the If statement to run when an option is selected
+ */
+let isMountainSelected = false;
+mountainSelect.addEventListener("mouseup", () => {
+  // Since the 'else' statement has already set isMountainSelected to true,
+  // selecting an option will trigger the 'if' statement
+  if (isMountainSelected) {
+    showMountainModal(mountainSelect.value);
+  } else {
+    // set to True when the select menu is opened
+    isMountainSelected = true;
+  }
+});
+
+/**
+ * The Blur event will reset isMountainSelected to false,
+ * signalling that the select menu is not opened
+ */
+mountainSelect.addEventListener("blur", () => {
+  isMountainSelected = false;
 });
