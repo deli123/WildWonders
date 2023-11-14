@@ -26,3 +26,14 @@ export const sortByKey = (array, key) => {
     return x < y ? -1 : x > y ? 1 : 0;
   });
 };
+
+// function that can "fetch" the sunrise/sunset times
+export const getSunsetForMountain = async (lat, lng) => {
+  let response = await fetch(
+    `https://api.sunrisesunset.io/json?lat=${lat}&lng=${lng}&date=today`
+  );
+  let data = await response.json();
+  let sunrise = data.results.sunrise;
+  let sunset = data.results.sunset;
+  return { sunrise, sunset };
+};

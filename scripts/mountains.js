@@ -2,7 +2,6 @@ import { mountainsData } from "./data/mountainData.js";
 import * as Util from "./utils.js";
 
 const mountainsArray = Util.sortByKey(mountainsData, "name");
-
 const mountainsContainer = document.getElementById("mountains-container");
 
 const createMountainCard = (mountain, index) => {
@@ -21,14 +20,15 @@ const createMountainModal = (mountain, index) => {
   // this ensures that the #id for each mountain is a single word
   const mountainLabel = mountain.name.split(" ").join("-");
   const modal = `
-  <div class="modal fade" id="mountain-${index}-modal" tabindex="-1" aria-labelledby="${mountainLabel}" aria-hidden="true">
+  <div class="modal fade" id="mountain-${index}-modal" tabindex="-1" aria-labelledby="${mountainLabel}" aria-hidden="true"
+    data-lng=${mountain.coords.lng} data-lat=${mountain.coords.lat}>
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header d-flex flex-column justify-content-center">
           <img src="assets/images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
           <h1 class="modal-title fs-5" id="${mountainLabel}">${mountain.name}</h1>
         </div>
-        <div class="modal-body text-center">
+        <div class="modal-body text-center" id="mountain-${index}-body">
           <p class="text-start">${mountain.desc}</p>
           <p><span class="fw-bold">Elevation: </span>${mountain.elevation}</p>
           <p><span class="fw-bold">Effort: </span>${mountain.effort}</p>
@@ -55,4 +55,28 @@ const populateMountains = () => {
   });
 };
 
+const createSunsetText = (sunsetData) => {
+  const sunrise = `<p><span class="fw-bold">Sunrise: </span>${sunsetData.sunrise} UTC</p>`;
+  const sunset = `<p><span class="fw-bold">Sunset: </span>${sunsetData.sunset} UTC</p>`;
+  return sunrise + sunset;
+};
+
+const displaySunsetTimes = async (mountainID) => {
+  const mountain = document.querySelector(`#${mountainID}-modal`);
+  const coords = {
+    lat: mountain.getAttribute("data-lat"),
+    lng: mountain.getAttribute("data-lng"),
+  };
+
+  const sunsetData = await Util.getSunsetForMountain(coords.lat, coords.lng);
+  const mountainBody = document.querySelector(`#${mountainID}-body`);
+  mountainBody.insertAdjacentHTML("beforeend", createSunsetText(sunsetData));
+};
+
 populateMountains();
+const allMountainCards = document.querySelectorAll(".card-mountain");
+allMountainCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    displaySunsetTimes(card.id);
+  });
+});
