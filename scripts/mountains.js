@@ -1,5 +1,5 @@
 import { mountainsData } from "./data/mountainData.js";
-import * as Util from "./utils.js";
+import { sortByKey, getSunsetForMountain } from "./utils.js";
 
 const mountainSelect = document.getElementById("mountain-select");
 
@@ -61,20 +61,28 @@ const createSunsetText = (sunsetData) => {
 };
 
 const displaySunsetTimes = async (mountainID) => {
+  const mountainBody = document.querySelector(`#${mountainID}-body`);
+
+  // Every mountainBody is guaranteed to have 5 or 7 (with sunrise/sunset) children
+  // If it does not have 5 children, then sunrise/sunset times have already been fetched
+  // and added as child nodes to mountainBody
+  if (mountainBody.children.length != 5) {
+    return;
+  }
+
   const mountain = document.querySelector(`#${mountainID}-modal`);
   const coords = {
     lat: mountain.getAttribute("data-lat"),
     lng: mountain.getAttribute("data-lng"),
   };
 
-  const sunsetData = await Util.getSunsetForMountain(coords.lat, coords.lng);
-  const mountainBody = document.querySelector(`#${mountainID}-body`);
+  const sunsetData = await getSunsetForMountain(coords.lat, coords.lng);
   mountainBody.insertAdjacentHTML("beforeend", createSunsetText(sunsetData));
 };
 
 // create a card and modal for each mountain
 const populateMountains = () => {
-  const mountainsArray = Util.sortByKey(mountainsData, "name");
+  const mountainsArray = sortByKey(mountainsData, "name");
   const mountainsContainer = document.getElementById("mountains-container");
 
   mountainsArray.forEach((mountain, index) => {
@@ -106,6 +114,7 @@ mountainSelect.addEventListener("mouseup", () => {
   // Since the 'else' statement has already set isMountainSelected to true,
   // selecting an option will trigger the 'if' statement
   if (isMountainSelected) {
+    displaySunsetTimes(mountainSelect.value);
     showMountainModal(mountainSelect.value);
   } else {
     // set to True when the select menu is opened
@@ -128,6 +137,6 @@ mountainSelect.addEventListener("blur", () => {
 const allMountainCards = document.querySelectorAll(".card-mountain");
 allMountainCards.forEach((card) => {
   card.addEventListener("click", () => {
-    // displaySunsetTimes(card.id);
+    displaySunsetTimes(card.id);
   });
 });
