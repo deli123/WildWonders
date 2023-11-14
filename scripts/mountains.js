@@ -1,8 +1,6 @@
 import { mountainsData } from "./data/mountainData.js";
 import * as Util from "./utils.js";
 
-const mountainsArray = Util.sortByKey(mountainsData, "name");
-const mountainsContainer = document.getElementById("mountains-container");
 const mountainSelect = document.getElementById("mountain-select");
 
 const createMountainCard = (mountain, index) => {
@@ -76,6 +74,9 @@ const displaySunsetTimes = async (mountainID) => {
 
 // create a card and modal for each mountain
 const populateMountains = () => {
+  const mountainsArray = Util.sortByKey(mountainsData, "name");
+  const mountainsContainer = document.getElementById("mountains-container");
+
   mountainsArray.forEach((mountain, index) => {
     const mountainOption = new Option(mountain.name, `mountain-${index}`);
     mountainSelect.appendChild(mountainOption);
@@ -87,18 +88,16 @@ const populateMountains = () => {
   });
 };
 
-populateMountains();
+/**
+ * Execute the following code whent the DOM is ready
+ */
 
-const allMountainCards = document.querySelectorAll(".card-mountain");
-allMountainCards.forEach((card) => {
-  card.addEventListener("click", () => {
-    // displaySunsetTimes(card.id);
-  });
-});
+populateMountains();
 
 /**
  * The 2 event listeners, "mouseup" and "blur" on the select element
  * work in tandem to allow the same option to be selected
+ * This allows the user to re-open the same mountain without having to select a different one first
  * When the select menu is initially opened, isMountainSelected will turn True
  * This will then allow the If statement to run when an option is selected
  */
@@ -120,4 +119,15 @@ mountainSelect.addEventListener("mouseup", () => {
  */
 mountainSelect.addEventListener("blur", () => {
   isMountainSelected = false;
+});
+
+/**
+ * Instead of fetching all sunrise/sunset times for all mountains at once,
+ * only fetch one time for the corresponding mountain that is picked
+ */
+const allMountainCards = document.querySelectorAll(".card-mountain");
+allMountainCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    // displaySunsetTimes(card.id);
+  });
 });

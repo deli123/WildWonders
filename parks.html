@@ -24,7 +24,8 @@
       crossorigin="anonymous"
       defer
     ></script>
-    <script type="module" src="scripts/parks.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="module" src="scripts/parks.js"></script>
   </head>
 
   <body>
@@ -56,10 +57,26 @@
               </select>
             </div>
           </div>
-          <div id="parks-container"></div>
+          <div class="spinner-border d-none" id="spinner" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div id="parks-container">
+          </div>
         </div>
       </section>
-      <section></section>
+      <section>
+        <button
+          type="button"
+          class="btn btn-sm border-0 rounded-pill"
+          id="btn-back-to-top"
+        >
+          <img
+            src="assets/images/icons/arrow-up-circle.svg"
+            width="40"
+            height="40"
+          />
+        </button>
+      </section>
     </main>
     <footer>
       <!-- place footer here -->
