@@ -7,8 +7,16 @@ import { hideElement, showElement } from "./utils.js";
 
 const locationSelect = document.getElementById("park-location");
 const typeSelect = document.getElementById("park-type");
+const allParkSelect = document.getElementById("park-all");
 const viewAllBtn = document.getElementById("view-all-btn");
 const parksContainer = document.getElementById("parks-container");
+
+const populateAllParkOptions = () => {
+  nationalParksArray.forEach((park, index) => {
+    const option = new Option(park.LocationName, `park-${index}`);
+    allParkSelect.appendChild(option);
+  });
+};
 
 const populateLocations = () => {
   locationsArray.forEach((location) => {
@@ -85,6 +93,8 @@ const createParkModal = (park, index) => {
           ${parkZipcode}
           ${parkPhone}
           ${parkFax}
+          <p class="m-0"><span class="fw-bold">Latitude: </span>${park.Latitude}</p>
+          <p class="m-0"><span class="fw-bold">Longitude: </span>${park.Longitude}</p>
           ${parkVisit}
         </div>
         <div class="modal-footer">
@@ -96,6 +106,26 @@ const createParkModal = (park, index) => {
   </div>`;
 
   return modal;
+};
+
+const showParkModal = (selectedPark) => {
+  // selectedPark is a string in the form "park-#"
+  // extract the # from the selectedPark value
+  const index = selectedPark.split("-")[1];
+  const park = nationalParksArray[index];
+  if (park) {
+    // first, check if a modal for the park already exists
+    let parkModalElement = document.getElementById(`${selectedPark}-modal`);
+    if (!parkModalElement) {
+      // if the park modal doesn't exist, then create a new one and add it to the HTML
+      const parkModal = createParkModal(nationalParksArray[index], index);
+      parksContainer.insertAdjacentHTML("beforeend", parkModal);
+      parkModalElement = document.getElementById(`${selectedPark}-modal`);
+    }
+
+    const modal = new bootstrap.Modal(parkModalElement);
+    modal.show();
+  }
 };
 
 const populateParksByLocation = () => {
@@ -175,8 +205,36 @@ const resetSelection = (category) => {
  * Execute the following code when the DOM is ready
  */
 
+populateAllParkOptions();
 populateLocations();
 populateTypes();
 locationSelect.addEventListener("change", populateParksByLocation);
 typeSelect.addEventListener("change", populateParksByType);
 viewAllBtn.addEventListener("click", populateAllParks);
+
+/**
+ * The 2 event listeners, "mouseup" and "blur" on the select element
+ * work in tandem to allow the same option to be selected
+ * This allows the user to re-open the same park without having to select a different one first
+ * When the select menu is initially opened, isParkSelected will turn True
+ * This will then allow the If statement to run when an option is selected
+ */
+let isParkSelected = false;
+allParkSelect.addEventListener("mouseup", () => {
+  // Since the 'else' statement has already set isParkSelected to true,
+  // selecting an option will trigger the 'if' statement
+  if (isParkSelected) {
+    showParkModal(allParkSelect.value);
+  } else {
+    // set to True when the select menu is opened
+    isParkSelected = true;
+  }
+});
+
+/**
+ * The Blur event will reset isParkSelected to false,
+ * signalling that the select menu is not opened
+ */
+allParkSelect.addEventListener("blur", () => {
+  isParkSelected = false;
+});
