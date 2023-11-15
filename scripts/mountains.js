@@ -1,3 +1,5 @@
+"use strict";
+
 import { mountainsData } from "./data/mountainData.js";
 import { sortByKey, getSunsetForMountain } from "./utils.js";
 

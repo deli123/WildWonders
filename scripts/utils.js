@@ -1,3 +1,5 @@
+"use strict";
+
 // Scroll to top button and event listeners
 const btnBackToTop = document.getElementById("btn-back-to-top");
 window.addEventListener("scroll", scrollFunction);

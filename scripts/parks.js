@@ -1,3 +1,5 @@
+"use strict";
+
 import { locationsArray } from "./data/locationData.js";
 import { nationalParksArray } from "./data/nationalParkData.js";
 import { parkTypesArray } from "./data/parkTypeData.js";
@@ -42,6 +44,31 @@ const createParkModal = (park, index) => {
   // since park names can have two words separated by a space (eg. Mt. Washington), join them with a hypen
   // this ensures that the #id for each park is a single word
   const parkLabel = park.LocationName.split(" ").join("-");
+
+  // Pad 0's in front of valid Zip Codes that are not at least 5 numbers
+  if (park.ZipCode !== 0 && park.ZipCode.toString().length < 5) {
+    const newZipCode = park.ZipCode.toString().padStart(5, "0");
+    park.ZipCode = newZipCode;
+  }
+
+  const parkAddress = park.Address
+    ? `<p class="m-0"><span class="fw-bold">Address: </span>${park.Address}</p>`
+    : "";
+  const parkZipcode = park.ZipCode
+    ? `<p class="m-0"><span class="fw-bold">Zip Code: </span>${park.ZipCode}</p>`
+    : "";
+  const parkPhone = park.Phone
+    ? `<p class="m-0"><span class="fw-bold">Phone: </span>${park.Phone}</p>`
+    : "";
+  const parkFax = park.Fax
+    ? `<p class="m-0"><span class="fw-bold">Fax: </span>${park.Fax}</p>`
+    : "";
+  const parkVisit = park.Visit
+    ? `<p class="m-0"><span class="fw-bold">Visit: </span>
+            <a href=${park.Visit} target="_blank">${park.Visit}</a>
+          </p>`
+    : "";
+
   const modal = `
   <div class="modal fade" id="park-${index}-modal" tabindex="-1"
     aria-labelledby="${parkLabel}" aria-hidden="true">
@@ -51,16 +78,14 @@ const createParkModal = (park, index) => {
           <h1 class="modal-title fs-5 mt-3 text-center" 
             id="${parkLabel}">${park.LocationName}</h1>
         </div>
-        <div class="modal-body text-center" id="park-${index}-body">
-          <p class="m-0"><span class="fw-bold">Address: </span>${
-            park.Address ? park.Address : ""
-          }</p>
-          <p class="m-0">${park.City}, ${park.State}</p>
-          ${
-            park.Visit
-              ? `<p class="m-0"><a href=${park.Visit} target="_blank">${park.Visit}</a></p>`
-              : ""
-          }
+        <div class="modal-body text-start" id="park-${index}-body">
+          ${parkAddress}
+          <p class="m-0"><span class="fw-bold">City: </span>${park.City}</p>
+          <p class="m-0"><span class="fw-bold">State: </span>${park.State}</p>
+          ${parkZipcode}
+          ${parkPhone}
+          ${parkFax}
+          ${parkVisit}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" 
@@ -69,9 +94,6 @@ const createParkModal = (park, index) => {
       </div>
     </div>
   </div>`;
-  if (!park.Address) {
-    console.log(park.LocationName);
-  }
 
   // const parkDetails = `<p class='m-0'>${park.LocationName}</p>
   //   <p class='m-0'>${park.Address ? park.Address + ", " : ""}
