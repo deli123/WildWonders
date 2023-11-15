@@ -33,7 +33,13 @@ export const sortByKey = (array, key) => {
   return array.sort((a, b) => {
     let x = a[key];
     let y = b[key];
-    return x < y ? -1 : x > y ? 1 : 0;
+    if (x < y) {
+      return -1;
+    } else if (x > y) {
+      return 1;
+    } else {
+      return 0;
+    }
   });
 };
 

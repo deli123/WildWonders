@@ -30,10 +30,10 @@ const createMountainModal = (mountain, index) => {
         </div>
         <div class="modal-body text-center" id="mountain-${index}-body">
           <p class="text-start">${mountain.desc}</p>
-          <p><span class="fw-bold">Elevation: </span>${mountain.elevation}</p>
-          <p><span class="fw-bold">Effort: </span>${mountain.effort}</p>
-          <p><span class="fw-bold">Latitude: </span>${mountain.coords.lat}</p>
-          <p><span class="fw-bold">Longitude: </span>${mountain.coords.lng}</p>
+          <p class="m-0"><span class="fw-bold">Elevation: </span>${mountain.elevation}</p>
+          <p class="m-0"><span class="fw-bold">Effort: </span>${mountain.effort}</p>
+          <p class="m-0"><span class="fw-bold">Latitude: </span>${mountain.coords.lat}</p>
+          <p class="m-0"><span class="fw-bold">Longitude: </span>${mountain.coords.lng}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" 
@@ -55,8 +55,8 @@ const showMountainModal = (selectedMountain) => {
 };
 
 const createSunsetText = (sunsetData) => {
-  const sunrise = `<p><span class="fw-bold">Sunrise: </span>${sunsetData.sunrise} UTC</p>`;
-  const sunset = `<p><span class="fw-bold">Sunset: </span>${sunsetData.sunset} UTC</p>`;
+  const sunrise = `<p class="m-0"><span class="fw-bold">Sunrise: </span>${sunsetData.sunrise} UTC</p>`;
+  const sunset = `<p class="m-0"><span class="fw-bold">Sunset: </span>${sunsetData.sunset} UTC</p>`;
   return sunrise + sunset;
 };
 

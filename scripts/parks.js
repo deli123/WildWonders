@@ -22,46 +22,112 @@ const populateTypes = () => {
   });
 };
 
-const generatePark = (park) => {
-  const parkDetails = `<p class='m-0'>${park.LocationName}</p>
-    <p class='m-0'>${park.Address ? park.Address + ", " : ""}
-    ${park.City}, ${park.State}
-    ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
-    ${
-      park.Visit
-        ? `<p><a href=${park.Visit} target="_blank">${park.Visit}</a></p>`
-        : ""
-    }`;
+const createParkCard = (park, index) => {
+  const card = `
+  <div class="col my-3">
+    <div class="card col mx-auto my-3 card-park h-100" 
+      data-bs-toggle="modal" data-bs-target="#park-${index}-modal"
+      id="park-${index}" style="max-width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title h-50">${park.LocationName}</h5>
+        <p class="card-text">${park.City}, ${park.State}</p>
+      </div>
+    </div>
+  </div>`;
 
-  return parkDetails;
+  return card;
+};
+
+const createParkModal = (park, index) => {
+  // since park names can have two words separated by a space (eg. Mt. Washington), join them with a hypen
+  // this ensures that the #id for each park is a single word
+  const parkLabel = park.LocationName.split(" ").join("-");
+  const modal = `
+  <div class="modal fade" id="park-${index}-modal" tabindex="-1"
+    aria-labelledby="${parkLabel}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header d-flex flex-column justify-content-center">
+          <h1 class="modal-title fs-5 mt-3 text-center" 
+            id="${parkLabel}">${park.LocationName}</h1>
+        </div>
+        <div class="modal-body text-center" id="park-${index}-body">
+          <p class="m-0"><span class="fw-bold">Address: </span>${
+            park.Address ? park.Address : ""
+          }</p>
+          <p class="m-0">${park.City}, ${park.State}</p>
+          ${
+            park.Visit
+              ? `<p class="m-0"><a href=${park.Visit} target="_blank">${park.Visit}</a></p>`
+              : ""
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" 
+          data-bs-dismiss="modal" aria-label="Close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  if (!park.Address) {
+    console.log(park.LocationName);
+  }
+
+  // const parkDetails = `<p class='m-0'>${park.LocationName}</p>
+  //   <p class='m-0'>${park.Address ? park.Address + ", " : ""}
+  //   ${park.City}, ${park.State}
+  //   ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
+  //   ${
+  //     park.Visit
+  //       ? `<p><a href=${park.Visit} target="_blank">${park.Visit}</a></p>`
+  //       : ""
+  //   }`;
+
+  return modal;
 };
 
 const populateParksByLocation = () => {
+  showElement(document.getElementById("spinner"));
   parksContainer.innerHTML = "";
-  nationalParksArray.forEach((park) => {
-    if (park.State === locationSelect.value) {
-      parksContainer.insertAdjacentHTML("beforeend", generatePark(park));
-    }
-  });
 
-  if (parksContainer.children.length === 0) {
-    parksContainer.insertAdjacentHTML("beforeend", "<h1>No results</h1>");
-  }
+  setTimeout(() => {
+    nationalParksArray.forEach((park, index) => {
+      if (park.State === locationSelect.value) {
+        parksContainer.insertAdjacentHTML(
+          "beforeend",
+          createParkCard(park, index) + createParkModal(park, index)
+        );
+      }
+    });
+
+    if (parksContainer.children.length === 0) {
+      parksContainer.insertAdjacentHTML("beforeend", "<h1>No results</h1>");
+    }
+    hideElement(document.getElementById("spinner"));
+  }, 0);
 };
 
 const populateParksByType = () => {
+  showElement(document.getElementById("spinner"));
   parksContainer.innerHTML = "";
-  nationalParksArray.forEach((park) => {
-    if (
-      park.LocationName.toLowerCase().includes(typeSelect.value.toLowerCase())
-    ) {
-      parksContainer.insertAdjacentHTML("beforeend", generatePark(park));
-    }
-  });
 
-  if (parksContainer.children.length === 0) {
-    parksContainer.insertAdjacentHTML("beforeend", "<h1>No results</h1>");
-  }
+  setTimeout(() => {
+    nationalParksArray.forEach((park, index) => {
+      if (
+        park.LocationName.toLowerCase().includes(typeSelect.value.toLowerCase())
+      ) {
+        parksContainer.insertAdjacentHTML(
+          "beforeend",
+          createParkCard(park, index) + createParkModal(park, index)
+        );
+      }
+    });
+
+    if (parksContainer.children.length === 0) {
+      parksContainer.insertAdjacentHTML("beforeend", "<h1>No results</h1>");
+    }
+    hideElement(document.getElementById("spinner"));
+  }, 0);
 };
 
 const populateAllParks = () => {
@@ -71,8 +137,11 @@ const populateAllParks = () => {
   parksContainer.innerHTML = "";
 
   setTimeout(() => {
-    nationalParksArray.forEach((park) => {
-      parksContainer.insertAdjacentHTML("beforeend", generatePark(park));
+    nationalParksArray.forEach((park, index) => {
+      parksContainer.insertAdjacentHTML(
+        "beforeend",
+        createParkCard(park, index) + createParkModal(park, index)
+      );
     });
     hideElement(document.getElementById("spinner"));
   }, 100);
