@@ -99,7 +99,7 @@ const populateMountains = () => {
 };
 
 /**
- * Execute the following code whent the DOM is ready
+ * Execute the following code when the DOM is ready
  */
 
 populateMountains();

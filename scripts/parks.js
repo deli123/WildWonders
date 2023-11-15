@@ -95,21 +95,12 @@ const createParkModal = (park, index) => {
     </div>
   </div>`;
 
-  // const parkDetails = `<p class='m-0'>${park.LocationName}</p>
-  //   <p class='m-0'>${park.Address ? park.Address + ", " : ""}
-  //   ${park.City}, ${park.State}
-  //   ${park.ZipCode ? ", " + park.ZipCode : ""}</p>
-  //   ${
-  //     park.Visit
-  //       ? `<p><a href=${park.Visit} target="_blank">${park.Visit}</a></p>`
-  //       : ""
-  //   }`;
-
   return modal;
 };
 
 const populateParksByLocation = () => {
   showElement(document.getElementById("spinner"));
+  resetSelection("type");
   parksContainer.innerHTML = "";
 
   setTimeout(() => {
@@ -131,6 +122,7 @@ const populateParksByLocation = () => {
 
 const populateParksByType = () => {
   showElement(document.getElementById("spinner"));
+  resetSelection("location");
   parksContainer.innerHTML = "";
 
   setTimeout(() => {
@@ -156,6 +148,7 @@ const populateAllParks = () => {
   // Since there are 359 parks, waiting for all parks to load at once can freeze the page
   // Thus, utilizing a spinner to signal that the results are loading can improve the user experience
   showElement(document.getElementById("spinner"));
+  resetSelection("all");
   parksContainer.innerHTML = "";
 
   setTimeout(() => {
@@ -169,8 +162,17 @@ const populateAllParks = () => {
   }, 100);
 };
 
+const resetSelection = (category) => {
+  if (category === "location" || category === "all") {
+    locationSelect.selectedIndex = 0;
+  }
+  if (category === "type" || category === "all") {
+    typeSelect.selectedIndex = 0;
+  }
+};
+
 /**
- * Execute the following code whent the DOM is ready
+ * Execute the following code when the DOM is ready
  */
 
 populateLocations();
