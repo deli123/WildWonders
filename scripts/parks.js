@@ -12,9 +12,13 @@ const viewAllBtn = document.getElementById("view-all-btn");
 const parksContainer = document.getElementById("parks-container");
 
 const populateAllParkOptions = () => {
+  // nationalParksArray.forEach((park, index) => {
+  //   const option = new Option(park.LocationName, `park-${index}`);
+  //   allParkSelect.appendChild(option);
+  // });
   nationalParksArray.forEach((park, index) => {
-    const option = new Option(park.LocationName, `park-${index}`);
-    allParkSelect.appendChild(option);
+    const option = `<li class="park-option" data-park="park-${index}"><a class="dropdown-item" href="#">${park.LocationName}</a></li>`;
+    allParkSelect.insertAdjacentHTML("beforeend", option);
   });
 };
 
@@ -201,6 +205,19 @@ const resetSelection = (category) => {
   }
 };
 
+const parkSearchFunction = () => {
+  const input = parkSearchInput.value.trim().toLowerCase();
+  const parkOptions = document.getElementsByClassName("park-option");
+
+  // Convert the HTMLCollection to an array for easier manipulation
+  const parkOptionsArray = Array.from(parkOptions);
+
+  parkOptionsArray.forEach((option) => {
+    const parkName = option.innerText.toLowerCase();
+    option.style.display = parkName.includes(input) ? "block" : "none";
+  });
+};
+
 /**
  * Execute the following code when the DOM is ready
  */
@@ -212,29 +229,14 @@ locationSelect.addEventListener("change", populateParksByLocation);
 typeSelect.addEventListener("change", populateParksByType);
 viewAllBtn.addEventListener("click", populateAllParks);
 
-/**
- * The 2 event listeners, "mouseup" and "blur" on the select element
- * work in tandem to allow the same option to be selected
- * This allows the user to re-open the same park without having to select a different one first
- * When the select menu is initially opened, isParkSelected will turn True
- * This will then allow the If statement to run when an option is selected
- */
-let isParkSelected = false;
-allParkSelect.addEventListener("mouseup", () => {
-  // Since the 'else' statement has already set isParkSelected to true,
-  // selecting an option will trigger the 'if' statement
-  if (isParkSelected) {
-    showParkModal(allParkSelect.value);
-  } else {
-    // set to True when the select menu is opened
-    isParkSelected = true;
-  }
-});
+// start at index 2 because index 0 is text, index 1 is the search input
+for (let i = 2; i < allParkSelect.childNodes.length; i++) {
+  const item = allParkSelect.childNodes[i];
+  item.addEventListener("click", () => {
+    const selectedPark = item.getAttribute("data-park");
+    showParkModal(selectedPark);
+  });
+}
 
-/**
- * The Blur event will reset isParkSelected to false,
- * signalling that the select menu is not opened
- */
-allParkSelect.addEventListener("blur", () => {
-  isParkSelected = false;
-});
+const parkSearchInput = document.getElementById("park-search");
+parkSearchInput.addEventListener("input", parkSearchFunction);

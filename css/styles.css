@@ -1,4 +1,5 @@
-.card-mountain:hover, .card-park:hover {
+.card-mountain:hover,
+.card-park:hover {
   cursor: pointer;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
@@ -10,4 +11,27 @@
   bottom: 20px;
   right: 20px;
   display: none;
+}
+
+.dropdown-menu {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.dropdown-toggle::after {
+  position: absolute;
+  right: 12.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  content: "";
+  border-top: 0.4em solid;
+  border-right: 0.4em solid transparent;
+  border-bottom: 0;
+  border-left: 0.4em solid transparent;
+}
+
+#park-search {
+  background: url("../assets/images/icons/search.svg");
+  background-repeat: no-repeat;
+  background-position: left center;
 }

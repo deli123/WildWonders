@@ -39,13 +39,27 @@
           <a href="#" class="btn btn-primary" id="view-all-btn">View all</a>
           <div class="row">
             <div class="col-12">
+              <div class="dropdown">
+                <button
+                  class="btn dropdown-toggle w-100 text-start border-black"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Search for a park...
+                </button>
+                <ul class="dropdown-menu w-100 border-black" id="park-all">
+                  <li>
+                    <input
+                      class="form-control border-secondary ps-4"
+                      id="park-search"
+                      placeholder="Search"
+                      autocomplete="off"
+                    />
+                  </li>
+                </ul>
+              </div>
               <label for="park-all" class="form-label">View All</label>
-              <select
-                class="form-select bg-transparent border-black"
-                id="park-all"
-              >
-                <option hidden disabled selected value="">Select...</option>
-              </select>
             </div>
             <div class="col-6">
               <label for="park-location" class="form-label">Location</label>
