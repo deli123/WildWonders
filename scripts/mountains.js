@@ -7,7 +7,7 @@ const mountainSelect = document.getElementById("mountain-select");
 
 const createMountainCard = (mountain, index) => {
   const card = `
-  <div class="card col-3 mx-auto my-3 card-mountain" id="mountain-${index}" 
+  <div class="card col-3 mx-auto my-3 card-mountain border-black border-3" id="mountain-${index}" 
     data-bs-toggle="modal" data-bs-target="#mountain-${index}-modal" style="width: 18rem;">
     <img src="assets/images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
     <div class="card-body">

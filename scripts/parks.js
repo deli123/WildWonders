@@ -12,10 +12,6 @@ const viewAllBtn = document.getElementById("view-all-btn");
 const parksContainer = document.getElementById("parks-container");
 
 const populateAllParkOptions = () => {
-  // nationalParksArray.forEach((park, index) => {
-  //   const option = new Option(park.LocationName, `park-${index}`);
-  //   allParkSelect.appendChild(option);
-  // });
   nationalParksArray.forEach((park, index) => {
     const option = `<li class="park-option" data-park="park-${index}"><a class="dropdown-item" href="#">${park.LocationName}</a></li>`;
     allParkSelect.insertAdjacentHTML("beforeend", option);

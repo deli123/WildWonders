@@ -20,7 +20,7 @@
 
 .dropdown-toggle::after {
   position: absolute;
-  right: 12.5px;
+  right: 15px;
   top: 50%;
   transform: translateY(-50%);
   content: "";
@@ -34,4 +34,12 @@
   background: url("../assets/images/icons/search.svg");
   background-repeat: no-repeat;
   background-position: left center;
+}
+
+#page-mountain {
+  background: url("../assets/images/background/bg-mountain-1.jpg"),
+    url("../assets/images/background/bg-mountain-2.jpg");
+  background-size: contain, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: top, bottom;
 }
