@@ -7,11 +7,11 @@ const mountainSelect = document.getElementById("mountain-select");
 
 const createMountainCard = (mountain, index) => {
   const card = `
-  <div class="card col-3 mx-auto my-3 card-mountain border-light border-5" id="mountain-${index}" 
+  <div class="card col-3 mx-auto my-3 card-mountain border-light-subtle border-5" id="mountain-${index}" 
     data-bs-toggle="modal" data-bs-target="#mountain-${index}-modal" style="width: 18rem;">
     <img src="assets/images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
-    <div class="card-body bg-black">
-      <h5 class="card-title text-center text-white">${mountain.name}</h5>
+    <div class="card-body bg-dark">
+      <h5 class="card-title text-center text-light">${mountain.name}</h5>
     </div>
   </div>`;
   return card;
@@ -25,14 +25,14 @@ const createMountainModal = (mountain, index) => {
   <div class="modal fade" id="mountain-${index}-modal" tabindex="-1" aria-labelledby="${mountainLabel}" aria-hidden="true"
     data-lng=${mountain.coords.lng} data-lat=${mountain.coords.lat}>
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content border-black border-5">
+      <div class="modal-content border-3 border-light">
         <div class="modal-header d-flex flex-column justify-content-center">
           <img src="assets/images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
           <h1 class="modal-title fs-5 mt-3" id="${mountainLabel}">${mountain.name}</h1>
         </div>
         <div class="modal-body text-center" id="mountain-${index}-body">
           <p class="text-start">${mountain.desc}</p>
-          <p class="m-0"><span class="fw-bold">Elevation: </span>${mountain.elevation}</p>
+          <p class="m-0"><span class="fw-bold">Elevation: </span>${mountain.elevation} ft.</p>
           <p class="m-0"><span class="fw-bold">Effort: </span>${mountain.effort}</p>
           <p class="m-0"><span class="fw-bold">Latitude: </span>${mountain.coords.lat}</p>
           <p class="m-0"><span class="fw-bold">Longitude: </span>${mountain.coords.lng}</p>

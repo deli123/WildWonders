@@ -23,12 +23,12 @@ function backToTop() {
 export const hideElement = (element) => {
   element.classList.remove("d-block");
   element.classList.add("d-none");
-}
+};
 
 export const showElement = (element) => {
   element.classList.remove("d-none");
   element.classList.add("d-block");
-}
+};
 
 export const sortByKey = (array, key) => {
   // sort by alphabetical/ascending order

@@ -36,6 +36,11 @@
   background-position: left center;
 }
 
+#park-search:focus {
+  border-color: black !important;
+  box-shadow: 0 0 0 0.2rem rgba(232, 234, 238, 0.5);
+}
+
 #page-mountain {
   background: url("../assets/images/background/bg-mountain-1.jpg");
   background-size: cover;

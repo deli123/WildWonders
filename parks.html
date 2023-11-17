@@ -61,23 +61,24 @@
       <section>
         <div class="container-fluid mvh-100" id="page-park">
           <div class="container">
-            <h1>Pick a category</h1>
-            <a href="#" class="btn btn-primary" id="view-all-btn">View all</a>
             <div class="row">
               <div class="col-12">
                 <div class="dropdown">
                   <button
-                    class="btn dropdown-toggle w-100 text-start border-black"
+                    class="btn dropdown-toggle w-100 text-start border-secondary-subtle border-5 bg-body-secondary"
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
                     Search for a park...
                   </button>
-                  <ul class="dropdown-menu w-100 border-black" id="park-all">
-                    <li>
+                  <ul
+                    class="dropdown-menu w-100 border-black py-0 bg-body-secondary"
+                    id="park-all"
+                  >
+                    <li class="bg-body-secondary">
                       <input
-                        class="form-control border-secondary ps-4"
+                        class="form-control ps-4 py-2 my-1 border-secondary-subtle border-2 bg-body-secondary"
                         id="park-search"
                         placeholder="Search"
                         autocomplete="off"
@@ -85,32 +86,42 @@
                     </li>
                   </ul>
                 </div>
-                <label for="park-all" class="form-label">View All</label>
               </div>
               <div class="col-6">
-                <label for="park-location" class="form-label">Location</label>
                 <select
-                  class="form-select bg-transparent border-black"
+                  class="form-select border-secondary-subtle border-5 bg-body-secondary"
                   id="park-location"
                 >
-                  <option hidden disabled selected value="">Select...</option>
+                  <option hidden disabled selected value="">
+                    Select a location...
+                  </option>
                 </select>
               </div>
               <div class="col-6">
-                <label for="park-type" class="form-label">Type</label>
                 <select
-                  class="form-select bg-transparent border-black"
+                  class="form-select border-secondary-subtle border-5 bg-body-secondary"
                   id="park-type"
                 >
-                  <option hidden disabled selected value="">Select...</option>
+                  <option hidden disabled selected value="">
+                    Select a park type...
+                  </option>
                 </select>
               </div>
+              <div class="col-2 mx-auto">
+                <button class="btn btn-primary w-100" id="view-all-btn">
+                  View all
+                </button>
+              </div>
             </div>
-            <div class="spinner-border d-none" id="spinner" role="status">
+            <div
+              class="spinner-border d-none mx-auto mt-5"
+              id="spinner"
+              role="status"
+            >
               <span class="visually-hidden">Loading...</span>
             </div>
             <div
-              class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"
+              class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 mt-4"
               id="parks-container"
             ></div>
           </div>
@@ -119,10 +130,11 @@
       <section>
         <button
           type="button"
-          class="btn btn-sm border-0 rounded-pill"
+          class="btn btn-sm border-0 rounded-circle"
           id="btn-back-to-top"
         >
           <img
+            class="bg-white rounded-circle border-light"
             src="assets/images/icons/arrow-up-circle.svg"
             width="40"
             height="40"
