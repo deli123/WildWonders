@@ -104,6 +104,12 @@ select {
   left: 0;
   background: rgba(0, 0, 0, 0.65);
   overflow: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+#hero-overlay::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 .btn-home-choice {

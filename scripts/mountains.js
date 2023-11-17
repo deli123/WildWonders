@@ -4,11 +4,13 @@ import { mountainsData } from "./data/mountainData.js";
 import { sortByKey, getSunsetForMountain } from "./utils.js";
 
 const mountainSelect = document.getElementById("mountain-select");
+const mountainsArray = sortByKey(mountainsData, "name");
+const mountainsContainer = document.getElementById("mountains-container");
 
 const createMountainCard = (mountain, index) => {
   const card = `
-  <div class="card col-3 mx-auto my-3 card-mountain border-light-subtle border-5" id="mountain-${index}" 
-    data-bs-toggle="modal" data-bs-target="#mountain-${index}-modal" style="width: 18rem;">
+  <div class="card col-3 mx-auto my-3 card-mountain border-light-subtle border-5"
+    id="mountain-${index}" style="width: 18rem;">
     <img src="assets/images/mountains/${mountain.img}" class="card-img-top" alt="${mountain.name}">
     <div class="card-body bg-dark">
       <h5 class="card-title text-center text-light">${mountain.name}</h5>
@@ -48,10 +50,26 @@ const createMountainModal = (mountain, index) => {
 };
 
 const showMountainModal = (selectedMountain) => {
-  // the mountain element can potentially be null if no mountain was selected
-  const mountain = document.getElementById(`${selectedMountain}-modal`);
+  // selectedMountain is a string in the form "mountain-#"
+  // extract the # from the selectedMountain value
+  const index = selectedMountain.split("-")[1];
+  const mountain = mountainsArray[index];
   if (mountain) {
-    const modal = new bootstrap.Modal(mountain);
+    // first, check if a modal for the mountain already exists
+    let mountainModalElement = document.getElementById(
+      `${selectedMountain}-modal`
+    );
+    if (!mountainModalElement) {
+      // if the mountain modal doesn't exist, then create a new one and add it to the HTML
+      const mountainModal = createMountainModal(mountain, index);
+      mountainsContainer.insertAdjacentHTML("beforeend", mountainModal);
+      mountainModalElement = document.getElementById(
+        `${selectedMountain}-modal`
+      );
+    }
+
+    displaySunsetTimes(selectedMountain);
+    const modal = new bootstrap.Modal(mountainModalElement);
     modal.show();
   }
 };
@@ -84,16 +102,13 @@ const displaySunsetTimes = async (mountainID) => {
 
 // create a card and modal for each mountain
 const populateMountains = () => {
-  const mountainsArray = sortByKey(mountainsData, "name");
-  const mountainsContainer = document.getElementById("mountains-container");
-
   mountainsArray.forEach((mountain, index) => {
     const mountainOption = new Option(mountain.name, `mountain-${index}`);
     mountainSelect.appendChild(mountainOption);
     // 'beforeend' inserts each mountain one after another
     mountainsContainer.insertAdjacentHTML(
       "beforeend",
-      createMountainCard(mountain, index) + createMountainModal(mountain, index)
+      createMountainCard(mountain, index)
     );
   });
 };
@@ -116,7 +131,6 @@ mountainSelect.addEventListener("mouseup", () => {
   // Since the 'else' statement has already set isMountainSelected to true,
   // selecting an option will trigger the 'if' statement
   if (isMountainSelected) {
-    displaySunsetTimes(mountainSelect.value);
     showMountainModal(mountainSelect.value);
   } else {
     // set to True when the select menu is opened
@@ -139,6 +153,6 @@ mountainSelect.addEventListener("blur", () => {
 const allMountainCards = document.querySelectorAll(".card-mountain");
 allMountainCards.forEach((card) => {
   card.addEventListener("click", () => {
-    displaySunsetTimes(card.id);
+    showMountainModal(card.id);
   });
 });

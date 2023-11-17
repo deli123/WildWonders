@@ -33,7 +33,7 @@
 
 # Code Snippet
 
-Below is a code snippet of the function I used to populate all 359 parks when the "View All" button is clicked. Because there are 359 different parks, the page could potentionally freeze while they are being added to the HTML. In order to combat this, I utilized a spinner component to display a loading icon while the parks are added asynchronously.
+Below is a code snippet of the function I used to populate all 359 parks when the "View All" button is clicked. Because there are 359 different parks, the page could potentionally freeze while they are being added to the HTML. In order to provide better feedback, I utilized a spinner component to display a loading icon while the parks are added asynchronously.
 
 ```js
 const populateAllParks = () => {
@@ -45,8 +45,9 @@ const populateAllParks = () => {
     nationalParksArray.forEach((park, index) => {
       parksContainer.insertAdjacentHTML(
         "beforeend",
-        createParkCard(park, index) + createParkModal(park, index)
+        createParkCard(park, index);
       );
+      addModalTrigger(`park-${index}`);
     });
     hideElement(document.getElementById("spinner"));
   }, 100);

@@ -35,8 +35,7 @@ const populateTypes = () => {
 const createParkCard = (park, index) => {
   const card = `
   <div class="col my-3">
-    <div class="card col mx-auto my-3 card-park h-100 border-light-subtle border-5" 
-      data-bs-toggle="modal" data-bs-target="#park-${index}-modal"
+    <div class="card col mx-auto my-3 card-park h-100 border-light-subtle border-5"
       id="park-${index}" style="max-width: 18rem;">
       <div class="card-body text-light bg-dark">
         <h5 class="card-title h-50">${park.LocationName}</h5>
@@ -108,7 +107,7 @@ const createParkModal = (park, index) => {
   return modal;
 };
 
-const showParkModal = (selectedPark) => {
+const showParkModal = (selectedPark, cardExists = true) => {
   // selectedPark is a string in the form "park-#"
   // extract the # from the selectedPark value
   const index = selectedPark.split("-")[1];
@@ -118,13 +117,28 @@ const showParkModal = (selectedPark) => {
     let parkModalElement = document.getElementById(`${selectedPark}-modal`);
     if (!parkModalElement) {
       // if the park modal doesn't exist, then create a new one and add it to the HTML
-      const parkModal = createParkModal(nationalParksArray[index], index);
+      const parkModal = createParkModal(park, index);
       parksContainer.insertAdjacentHTML("beforeend", parkModal);
       parkModalElement = document.getElementById(`${selectedPark}-modal`);
+
+      if (cardExists) {
+        // assign data attributes to connect Card to Modal
+        const parkCard = document.getElementById(selectedPark);
+        parkCard.dataset.bsTarget = `#park-${index}-modal`;
+        parkCard.dataset.bsToggle = "modal";
+      }
     }
 
     const modal = new bootstrap.Modal(parkModalElement);
     modal.show();
+  }
+};
+
+const addModalTrigger = (parkId) => {
+  const parkCard = document.getElementById(parkId);
+  if (parkCard) {
+    // parkCard.dataset.bsTarget = `#park-${index}-modal`
+    parkCard.addEventListener("click", () => showParkModal(parkId));
   }
 };
 
@@ -138,8 +152,9 @@ const populateParksByLocation = () => {
       if (park.State === locationSelect.value) {
         parksContainer.insertAdjacentHTML(
           "beforeend",
-          createParkCard(park, index) + createParkModal(park, index)
+          createParkCard(park, index)
         );
+        addModalTrigger(`park-${index}`);
       }
     });
 
@@ -165,8 +180,9 @@ const populateParksByType = () => {
       ) {
         parksContainer.insertAdjacentHTML(
           "beforeend",
-          createParkCard(park, index) + createParkModal(park, index)
+          createParkCard(park, index)
         );
+        addModalTrigger(`park-${index}`);
       }
     });
 
@@ -188,8 +204,9 @@ const populateAllParks = () => {
     nationalParksArray.forEach((park, index) => {
       parksContainer.insertAdjacentHTML(
         "beforeend",
-        createParkCard(park, index) + createParkModal(park, index)
+        createParkCard(park, index)
       );
+      addModalTrigger(`park-${index}`);
     });
     hideElement(document.getElementById("spinner"));
   }, 100);
@@ -233,7 +250,7 @@ for (let i = 2; i < allParkSelect.childNodes.length; i++) {
   const item = allParkSelect.childNodes[i];
   item.addEventListener("click", () => {
     const selectedPark = item.getAttribute("data-park");
-    showParkModal(selectedPark);
+    showParkModal(selectedPark, false);
   });
 }
 
