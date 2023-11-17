@@ -112,3 +112,14 @@ select {
 .btn-home-choice:hover {
   background-color: #9da3a4;
 }
+
+#logo {
+  display: block;
+  width: 200px;
+  height: 50px;
+  background: url("../assets/images/WildWonders-logos.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: scale(1.2);
+}
