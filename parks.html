@@ -62,7 +62,7 @@
         <div class="container-fluid mvh-100" id="page-park">
           <div class="container">
             <div class="row">
-              <div class="col-12">
+              <div class="col-12 my-2 mt-5">
                 <div class="dropdown">
                   <button
                     class="btn dropdown-toggle w-100 text-start border-secondary-subtle border-5 bg-body-secondary"
@@ -87,7 +87,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-6 my-2">
                 <select
                   class="form-select border-secondary-subtle border-5 bg-body-secondary"
                   id="park-location"
@@ -97,7 +97,7 @@
                   </option>
                 </select>
               </div>
-              <div class="col-6">
+              <div class="col-6 my-2">
                 <select
                   class="form-select border-secondary-subtle border-5 bg-body-secondary"
                   id="park-type"
@@ -107,21 +107,24 @@
                   </option>
                 </select>
               </div>
-              <div class="col-2 mx-auto">
-                <button class="btn btn-primary w-100" id="view-all-btn">
-                  View all
-                </button>
-              </div>
+            </div>
+            <div class="row my-3">
+              <button
+                class="btn btn-secondary mx-auto border-secondary-subtle border-5"
+                id="view-all-btn"
+              >
+                View All
+              </button>
             </div>
             <div
-              class="spinner-border d-none mx-auto mt-5"
+              class="spinner-border d-none mx-auto mt-5 text-white"
               id="spinner"
               role="status"
             >
               <span class="visually-hidden">Loading...</span>
             </div>
             <div
-              class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 mt-4"
+              class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 mt-3"
               id="parks-container"
             ></div>
           </div>
@@ -136,8 +139,8 @@
           <img
             class="bg-white rounded-circle border-light"
             src="assets/images/icons/arrow-up-circle.svg"
-            width="40"
-            height="40"
+            width="50"
+            height="50"
           />
         </button>
       </section>

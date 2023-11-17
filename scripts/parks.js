@@ -144,7 +144,10 @@ const populateParksByLocation = () => {
     });
 
     if (parksContainer.children.length === 0) {
-      parksContainer.insertAdjacentHTML("beforeend", "<h1>No results</h1>");
+      parksContainer.insertAdjacentHTML(
+        "beforeend",
+        "<h1 class='mx-auto text-center text-light'>No results</h1>"
+      );
     }
     hideElement(document.getElementById("spinner"));
   }, 0);
