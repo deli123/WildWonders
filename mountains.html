@@ -31,11 +31,13 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav
+        class="navbar navbar-expand-md bg-platinum border-bottom border-secondary border-5"
+      >
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">WildWonders</a>
+          <a class="navbar-brand col-1" href="index.html">WildWonders</a>
           <button
-            class="navbar-toggler"
+            class="navbar-toggler ms-auto"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -46,21 +48,27 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="parks.html">Parks</a>
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item px-1">
+                <a class="nav-link fs-5 text-dark" href="index.html">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="mountains.html">Mountains</a>
+              <li class="nav-item px-1">
+                <a class="nav-link fs-5 text-dark" href="parks.html">Parks</a>
+              </li>
+              <li class="nav-item px-1">
+                <a class="nav-link fs-5 text-dark" href="mountains.html"
+                  >Mountains</a
+                >
               </li>
             </ul>
           </div>
+          <div class="col-1 d-none d-md-block"></div>
         </div>
       </nav>
     </header>
     <main>
       <section>
-        <div class="container-fluid" id="page-mountain">
+        <div class="container-fluid pb-5" id="page-mountain">
           <div class="container">
             <div class="mx-3 pt-5 pb-4">
               <select
@@ -93,6 +101,23 @@
         </button>
       </section>
     </main>
-    <footer></footer>
+    <footer class="py-3 bg-platinum">
+      <ul
+        class="nav justify-content-center border-bottom pb-3 mb-3 border-secondary-subtle"
+      >
+        <li class="nav-item px-1">
+          <a class="nav-link text-body-secondary" href="index.html">Home</a>
+        </li>
+        <li class="nav-item px-1">
+          <a class="nav-link text-body-secondary" href="parks.html">Parks</a>
+        </li>
+        <li class="nav-item px-1">
+          <a class="nav-link text-body-secondary" href="mountains.html"
+            >Mountains</a
+          >
+        </li>
+      </ul>
+      <p class="text-center text-body-secondary">© 2023 WildWonders</p>
+    </footer>
   </body>
 </html>
