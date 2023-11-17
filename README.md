@@ -1,12 +1,14 @@
 # WildWonders
 
-[WildWonders](https://deli123.github.io/WildWonders/) is a website that lets you explore 359 national parks and 48 mountains in the USA.
+[WildWonders](https://deli123.github.io/WildWonders/) is a website that lets you explore 359 national parks and 48 mountains in the USA and its territories.
 
 # Features
 
-- **Five pages**: Landing, parks, and mountains pages
+- **Three pages**: Landing, parks, and mountains pages
+  * Parks can be filtered by 55 different locations or 13 different park types.
+  * Mountain page contains a dropdown of all 48 mountains, as well as Card previews for each of them.
 - **Responsive Design**: Accessible on all devices, ensuring a smooth experience whether you're on a desktop, tablet, or mobile phone.
-- **Search for parks**: Search through all 359 parks, possible options will be filtered on each input
+- **Search input for parks**: Search through all 359 parks, matching results will be filtered on each input
 - **Card & Modal combo**: Each park/mountain has a Card preview. Upon clicking on one, a Modal will pop up with more detailed information about the corresponding place.
 
 # Technologies
