@@ -7,6 +7,10 @@
   font-family: Larsseit, Helvetica, sans-serif;
 }
 
+select {
+  cursor: pointer;
+}
+
 .card-mountain:hover,
 .card-park:hover {
   cursor: pointer;
@@ -67,6 +71,14 @@
   background-attachment: fixed;
 }
 
+#page-home {
+  background: url("../assets/images/background/bg-mountain-2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .mvh-100 {
   min-height: 100vh;
 }
@@ -81,5 +93,22 @@
 }
 
 .bg-platinum {
-  background-color: #D0DDD7;
+  background-color: #d0ddd7;
+}
+
+/* set transparent overlay on top of hero image */
+#hero-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.btn-home-choice {
+  width: 125px;
+}
+
+.btn-home-choice:hover {
+  background-color: #9da3a4;
 }

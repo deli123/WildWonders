@@ -24,16 +24,133 @@
       crossorigin="anonymous"
       defer
     ></script>
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="scripts/utils.js"></script>
   </head>
 
   <body>
     <header>
-      <a href="parks.html" class="btn btn-primary">National Parks</a>
-      <a href="mountains.html" class="btn btn-primary">Mountains</a>
+      <nav
+        class="navbar navbar-expand-md bg-platinum border-bottom border-secondary border-5"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand col-1" href="index.html">WildWonders</a>
+          <button
+            class="navbar-toggler ms-auto"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item px-1">
+                <a class="nav-link fs-5 text-dark" href="index.html">Home</a>
+              </li>
+              <li class="nav-item px-1">
+                <a class="nav-link fs-5 text-dark" href="parks.html">Parks</a>
+              </li>
+              <li class="nav-item px-1">
+                <a class="nav-link fs-5 text-dark" href="mountains.html"
+                  >Mountains</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-1 d-none d-md-block"></div>
+        </div>
+      </nav>
     </header>
-    <main></main>
-    <footer>
-      <!-- place footer here -->
+    <main>
+      <section>
+        <div class="container-fluid mvh-100 pb-5" id="page-home">
+          <div class="pt-5" id="hero-overlay">
+            <h1
+              class="display-1 fw-bold lh-1 text-center text-light px-2"
+              id="header-text"
+            >
+              Elevate Your Exploration:
+            </h1>
+            <p
+              class="display-3 text-center fw-bold text-light"
+              id="subheader-text"
+            >
+              Parks vs Mountains
+            </p>
+            <div class="container d-flex flex-row flex-wrap mt-5">
+              <div class="col-12 col-md-6 d-flex flex-column px-5">
+                <a
+                  href="parks.html"
+                  class="btn btn-lg bg-platinum mx-auto btn-home-choice mb-4"
+                  >Parks</a
+                >
+                <div>
+                  <p class="text-light fs-4">
+                    Navigate through pristine trails, encounter nature's beauty,
+                    and delve into a rich tapestry of cultural and historical
+                    significance. From the towering cliffs of Yosemite to the
+                    geothermal wonders of Yellowstone, the choice to explore
+                    national parks promises an immersive journey into the heart
+                    of our natural heritage.
+                  </p>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 d-flex flex-column px-5">
+                <a
+                  href="mountains.html"
+                  class="btn btn-lg bg-platinum mx-auto btn-home-choice mb-4"
+                  >Mountains</a
+                >
+                <p class="text-white fs-4">
+                  Embark on the journey of choosing mountains, where rugged
+                  peaks beckon with an invitation to conquer heights and behold
+                  awe-inspiring vistas. From the challenging summits of the
+                  Rockies to the serene beauty of the Swiss Alps, the choice to
+                  embrace mountains is an ascent into a world of majestic
+                  grandeur.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <button
+          type="button"
+          class="btn btn-sm border-0 rounded-circle"
+          id="btn-back-to-top"
+        >
+          <img
+            class="bg-white rounded-circle border-light"
+            src="assets/images/icons/arrow-up-circle.svg"
+            width="50"
+            height="50"
+          />
+        </button>
+      </section>
+    </main>
+    <footer class="py-3 bg-platinum">
+      <ul
+        class="nav justify-content-center border-bottom pb-3 mb-3 border-secondary-subtle"
+      >
+        <li class="nav-item px-1">
+          <a class="nav-link text-body-secondary" href="index.html">Home</a>
+        </li>
+        <li class="nav-item px-1">
+          <a class="nav-link text-body-secondary" href="parks.html">Parks</a>
+        </li>
+        <li class="nav-item px-1">
+          <a class="nav-link text-body-secondary" href="mountains.html"
+            >Mountains</a
+          >
+        </li>
+      </ul>
+      <p class="text-center text-body-secondary">© 2023 WildWonders</p>
     </footer>
   </body>
 </html>
