@@ -35,7 +35,7 @@ const populateTypes = () => {
 const createParkCard = (park, index) => {
   const card = `
   <div class="col my-3">
-    <div class="card col mx-auto my-3 card-park h-100" 
+    <div class="card col mx-auto my-3 card-park h-100 border-light border-3 bg-light text-black" 
       data-bs-toggle="modal" data-bs-target="#park-${index}-modal"
       id="park-${index}" style="max-width: 18rem;">
       <div class="card-body">

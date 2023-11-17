@@ -1,8 +1,8 @@
 .card-mountain:hover,
 .card-park:hover {
   cursor: pointer;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(255, 255, 255, 0.8) 0px 50px 100px -20px,
+    rgba(255, 255, 255, 1) 0px 30px 60px -30px;
   transform: scale(1.01);
 }
 
@@ -37,9 +37,21 @@
 }
 
 #page-mountain {
-  background: url("../assets/images/background/bg-mountain-1.jpg"),
-    url("../assets/images/background/bg-mountain-2.jpg");
-  background-size: contain, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-position: top, bottom;
+  background: url("../assets/images/background/bg-mountain-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed;
+}
+
+#page-park {
+  background: url("../assets/images/background/yosemite.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed;
+}
+
+.mvh-100 {
+  min-height: 100vh;
 }

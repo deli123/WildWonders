@@ -59,59 +59,61 @@
     </header>
     <main>
       <section>
-        <div class="container">
-          <h1>Pick a category</h1>
-          <a href="#" class="btn btn-primary" id="view-all-btn">View all</a>
-          <div class="row">
-            <div class="col-12">
-              <div class="dropdown">
-                <button
-                  class="btn dropdown-toggle w-100 text-start border-black"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Search for a park...
-                </button>
-                <ul class="dropdown-menu w-100 border-black" id="park-all">
-                  <li>
-                    <input
-                      class="form-control border-secondary ps-4"
-                      id="park-search"
-                      placeholder="Search"
-                      autocomplete="off"
-                    />
-                  </li>
-                </ul>
+        <div class="container-fluid mvh-100" id="page-park">
+          <div class="container">
+            <h1>Pick a category</h1>
+            <a href="#" class="btn btn-primary" id="view-all-btn">View all</a>
+            <div class="row">
+              <div class="col-12">
+                <div class="dropdown">
+                  <button
+                    class="btn dropdown-toggle w-100 text-start border-black"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Search for a park...
+                  </button>
+                  <ul class="dropdown-menu w-100 border-black" id="park-all">
+                    <li>
+                      <input
+                        class="form-control border-secondary ps-4"
+                        id="park-search"
+                        placeholder="Search"
+                        autocomplete="off"
+                      />
+                    </li>
+                  </ul>
+                </div>
+                <label for="park-all" class="form-label">View All</label>
               </div>
-              <label for="park-all" class="form-label">View All</label>
+              <div class="col-6">
+                <label for="park-location" class="form-label">Location</label>
+                <select
+                  class="form-select bg-transparent border-black"
+                  id="park-location"
+                >
+                  <option hidden disabled selected value="">Select...</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label for="park-type" class="form-label">Type</label>
+                <select
+                  class="form-select bg-transparent border-black"
+                  id="park-type"
+                >
+                  <option hidden disabled selected value="">Select...</option>
+                </select>
+              </div>
             </div>
-            <div class="col-6">
-              <label for="park-location" class="form-label">Location</label>
-              <select
-                class="form-select bg-transparent border-black"
-                id="park-location"
-              >
-                <option hidden disabled selected value="">Select...</option>
-              </select>
+            <div class="spinner-border d-none" id="spinner" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
-            <div class="col-6">
-              <label for="park-type" class="form-label">Type</label>
-              <select
-                class="form-select bg-transparent border-black"
-                id="park-type"
-              >
-                <option hidden disabled selected value="">Select...</option>
-              </select>
-            </div>
+            <div
+              class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"
+              id="parks-container"
+            ></div>
           </div>
-          <div class="spinner-border d-none" id="spinner" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-          <div
-            class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"
-            id="parks-container"
-          ></div>
         </div>
       </section>
       <section>
